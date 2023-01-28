@@ -4,3 +4,21 @@ function getComputerChoice() {
 
     return choices[randomIndex]
 }
+
+function getPlayerChoice() {
+    let playerChoice = prompt("Enter your move choice:").toLowerCase();
+
+    return checkPlayerChoice(playerChoice) ? playerChoice : getPlayerChoice();
+}
+
+function checkPlayerChoice(playerChoice) {
+    if (playerChoice == "rock"
+    || playerChoice == "paper"
+    || playerChoice == "scissors") {
+        return true
+    } else {
+        return false
+    }
+}
+
+
