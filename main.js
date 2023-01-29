@@ -22,25 +22,57 @@ function checkPlayerChoice(playerChoice) {
 }
 
 function playRound(playerSelection, computerSelection) {
+    // return 0 means draw
+    // return 1 means player wins
+    // return 2 means computer wins
+
     if (playerSelection == computerSelection) {
-        return "It's a Draw!"
+        console.log("It's a Draw!");
+        return 0;
     } else if (playerSelection == "rock") {
         if (computerSelection == "scissors") {
-            return "You Win! Rock beats Scissors."
+            console.log("You Win! Rock beats Scissors.");
+            return 1;
         } else {
-            return  "You Lose! Paper beats Rock."
+            console.log("You Lose! Paper beats Rock.");
+            return 2;
         }
     } else if (playerSelection == "scissors") {
         if (computerSelection == "paper") {
-            return "You Win! Scissors beats Paper."
+            console.log("You Win! Scissors beats Paper.");
+            return 1;
         } else {
-            return "You Lose! Rock beats Scissors."
+            console.log("You Lose! Rock beats Scissors.");
+            return 2;
         }
     } else if (playerSelection == "paper") {
         if (computerSelection == "rock") {
-            return "You Win! Paper beats Rock."
+            console.log("You Win! Paper beats Rock.");
+            return 1;
         } else {
-            return "You Lose! Scissors beats Paper."
+            console.log("You Lose! Scissors beats Paper.");
+            return 2;
         }
     }
+}
+
+function game() {
+    let playerPoints = 0;
+    let computerPoints = 0;
+    let roundWinner;
+
+    console.log(`Score is ${playerPoints}-${computerPoints}`);
+
+    for (let i = 0; i < 5; i++) {
+        roundWinner = playRound(getPlayerChoice(), getComputerChoice());
+
+        if (roundWinner == 1) {
+            playerPoints++;
+        } else if (roundWinner == 2) {
+            computerPoints++;
+        }
+        console.log(`Score is ${playerPoints}-${computerPoints}`);
+    }
+
+    return playerPoints > computerPoints ? "Player wins." : "Computer wins.";
 }
