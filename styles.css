@@ -1,0 +1,22 @@
+html {
+  background-color:#2e3440;
+}
+
+h1 {
+  margin-bottom: 100px;
+  text-align: center;
+  font-weight: bold;
+  color: #eceff4;
+  font-size: 50px;
+}
+
+.content {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 40px;
+}
+
+img {
+  width: 300px;
+}
