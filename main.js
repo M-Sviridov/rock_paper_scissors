@@ -1,3 +1,18 @@
+const rock = document.querySelector("#rock");
+rock.addEventListener("click", () => {
+  playRound("rock", getComputerChoice());
+});
+
+const paper = document.querySelector("#paper");
+paper.addEventListener("click", () => {
+  playRound("paper", getComputerChoice());
+});
+
+const scissors = document.querySelector("#scissors");
+scissors.addEventListener("click", () => {
+  playRound("scissors", getComputerChoice());
+});
+
 function getComputerChoice() {
   let choices = ["rock", "paper", "scissors"];
   let randomIndex = Math.floor(Math.random() * choices.length);
@@ -27,6 +42,9 @@ function playRound(playerSelection, computerSelection) {
   // return 0 means draw
   // return 1 means player wins
   // return 2 means computer wins
+
+  console.log(playerSelection);
+  console.log(computerSelection);
 
   if (playerSelection == computerSelection) {
     console.log("It's a Draw!");
