@@ -1,17 +1,24 @@
+const div = document.createElement("div");
+
+const roundResults = document.querySelector(".round-results");
+
 const rock = document.querySelector("#rock");
 rock.addEventListener("click", () => {
-  playRound("rock", getComputerChoice());
+  game("rock", getComputerChoice());
 });
 
 const paper = document.querySelector("#paper");
 paper.addEventListener("click", () => {
-  playRound("paper", getComputerChoice());
+  game("paper", getComputerChoice());
 });
 
 const scissors = document.querySelector("#scissors");
 scissors.addEventListener("click", () => {
-  playRound("scissors", getComputerChoice());
+  game("scissors", getComputerChoice());
 });
+
+const computerScore = document.querySelector(".computer-score");
+const playerScore = document.querySelector(".player-score");
 
 function getComputerChoice() {
   let choices = ["rock", "paper", "scissors"];
@@ -39,60 +46,75 @@ function checkPlayerChoice(playerChoice) {
 }
 
 function playRound(playerSelection, computerSelection) {
-  // return 0 means draw
-  // return 1 means player wins
-  // return 2 means computer wins
+  let roundWinner = "";
 
-  console.log(playerSelection);
-  console.log(computerSelection);
+  if (checkGameStatus() == 0) {
+  }
 
   if (playerSelection == computerSelection) {
-    console.log("It's a Draw!");
-    return 0;
+    div.textContent = "It's a Draw!";
+    roundResults.appendChild(div);
+    roundWinner = "draw";
   } else if (playerSelection == "rock") {
     if (computerSelection == "scissors") {
-      console.log("You Win! Rock beats Scissors.");
-      return 1;
+      div.textContent = "You Win! Rock beats Scissors.";
+      roundResults.appendChild(div);
+      roundWinner = "player";
     } else {
-      console.log("You Lose! Paper beats Rock.");
-      return 2;
+      div.textContent = "You Lose! Paper beats Rock.";
+      roundResults.appendChild(div);
+      roundWinner = "computer";
     }
   } else if (playerSelection == "scissors") {
     if (computerSelection == "paper") {
-      console.log("You Win! Scissors beats Paper.");
-      return 1;
+      div.textContent = "You Win! Scissors beats Paper.";
+      roundResults.appendChild(div);
+      roundWinner = "player";
     } else {
-      console.log("You Lose! Rock beats Scissors.");
-      return 2;
+      div.textContent = "You Lose! Rock beats Scissors.";
+      roundResults.appendChild(div);
+      roundWinner = "computer";
     }
   } else if (playerSelection == "paper") {
     if (computerSelection == "rock") {
-      console.log("You Win! Paper beats Rock.");
-      return 1;
+      div.textContent = "You Win! Paper beats Rock.";
+      roundResults.appendChild(div);
+      roundWinner = "player";
     } else {
-      console.log("You Lose! Scissors beats Paper.");
-      return 2;
+      div.textContent = "You Lose! Scissors beats Paper.";
+      roundResults.appendChild(div);
+      roundWinner = "computer";
     }
+  }
+  updateScore(roundWinner);
+
+  if (checkGameStatus() == 0) {
+    div.textContent = "The Player wins.";
+    return;
+  } else if (checkGameStatus() == 1) {
+    div.textContent = "The Computer wins.";
+    return;
   }
 }
 
-function game() {
-  let playerPoints = 0;
-  let computerPoints = 0;
-  let roundWinner;
-
-  console.log(`Score is ${playerPoints}-${computerPoints}`);
-
-  for (let i = 0; i < 5; i++) {
-    roundWinner = playRound(getPlayerChoice(), getComputerChoice());
-
-    if (roundWinner == 1) {
-      playerPoints++;
-    } else if (roundWinner == 2) {
-      computerPoints++;
-    }
-    console.log(`Score is ${playerPoints}-${computerPoints}`);
+function game(playerSelection, computerSelection) {
+  if (checkGameStatus() != 0) {
+    playRound(playerSelection, computerSelection);
   }
+}
 
-  return playerPoints > computerPoints ? "Player wins." : "Computer wins.";
+function updateScore(roundWinner) {
+  if (roundWinner == "player") {
+    playerScore.textContent = Number(`${playerScore.textContent}`) + 1;
+  } else if (roundWinner == "computer") {
+    computerScore.textContent = Number(`${computerScore.textContent}`) + 1;
+  }
+}
+
+function checkGameStatus() {
+  if (playerScore.textContent == 5) {
+    return 0;
+  } else if (computerScore.textContent == 5) {
+    return 1;
+  }
 }
