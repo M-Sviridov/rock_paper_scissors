@@ -48,9 +48,6 @@ function checkPlayerChoice(playerChoice) {
 function playRound(playerSelection, computerSelection) {
   let roundWinner = "";
 
-  if (checkGameStatus() == 0) {
-  }
-
   if (playerSelection == computerSelection) {
     div.textContent = "It's a Draw!";
     roundResults.appendChild(div);
@@ -98,7 +95,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game(playerSelection, computerSelection) {
-  if (checkGameStatus() != 0) {
+  if (checkGameStatus() != 0 && checkGameStatus() != 1) {
     playRound(playerSelection, computerSelection);
   }
 }
